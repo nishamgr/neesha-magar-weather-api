@@ -1,0 +1,20 @@
+*{
+margin: 0;
+padding: 0;
+font-family: 'poppins', sans-serif;
+box-sizing: border-box;
+}
+body{
+    background: #333;
+}
+
+.container{
+    width: 90%;
+    max-width: 470px;
+    background: linear-gradient(135deg, #89f7fe, #66a6ff);
+    color: #fff;
+    margin: 100px auto 0;
+    border-radius: 20px;
+    padding: 40px 53px;
+    text-align: center;
+}
