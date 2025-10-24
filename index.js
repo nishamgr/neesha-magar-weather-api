@@ -1,16 +1,24 @@
 
- async function getCoordinates(city) {
-  const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${city}`; //to get coordinates lat and long of the city searched
-  const res = await fetch(geoUrl);
-  const data = await res.json();
-  if (data.results && data.results.length > 0) {
-    return {
-      lat: data.results[0].latitude,
-      lon: data.results[0].longitude
-    };
-  } else {
-    alert("City Not found");
-    throw new Error("City not found");
+//func to get coordinates of a city
+async function getCoordinates(city) {
+  try {
+    const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${city}`;
+    const res = await fetch(geoUrl);
+    const data = await res.json();
+
+    if (data.results && data.results.length > 0) {
+      return {
+        lat: data.results[0].latitude,
+        lon: data.results[0].longitude
+      };
+    } else {
+      alert("City not found");
+      throw new Error("City not found");
+    }
+  } catch (error) {
+    console.error("Error fetching coordinates:", error);
+    alert("Failed to fetch coordinates. Please try again.");
+    return null;
   }
 }
 //func to displays current weather
