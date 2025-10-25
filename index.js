@@ -21,9 +21,15 @@ async function getCoordinates(city) {
     return null;
   }
 }
-//func to displays current weather
-async function getWeather() {
-  document.getElementById("forecast").style.display = "none";
+//HTTP GET, func to displays current weather
+async function getWeather() { 
+  const weatherBtn = document.getElementById("weather-btn");
+  const forecastBtn = document.getElementById("forecast-btn");
+  
+  //toggle button colors
+  weatherBtn.classList.add("active");
+  forecastBtn.classList.remove("active");
+
   const city = document.getElementById("city").value;
   try {
     const { lat, lon } = await getCoordinates(city);
@@ -39,9 +45,14 @@ async function getWeather() {
     // Display current weather immediately
     displayCurrent(currentData.current);
  
-    // Show the forecast button now that current weather is displayed
-    document.getElementById("show-forecast").style.display = "inline-block";
-    document.getElementById("currentWeatherDiv").style.display = "inline-block";
+    // Show the button tabs
+    document.getElementById("tab-button-section").style.display = "flex";
+
+    //Show current weather section
+    document.getElementById("current-weather").style.display = "block";
+    
+    //Hide forecast section
+    document.getElementById("forecast-section").style.display = "none";
 
  
   } catch (err) {
@@ -62,8 +73,17 @@ function displayCurrent(data) {
     icon.src = "images/cloudy.png";
   }
 }
- //fetch 7 days forecast
+ //HTTP GET, fetch 7 days forecast
 async function getForecast(){
+  //change button bg color for 7 day forecast
+  const weatherBtn = document.getElementById("weather-btn");
+  const forecastBtn = document.getElementById("forecast-btn");
+
+  //toggle button colors  
+  forecastBtn.classList.add("active");
+  weatherBtn.classList.remove("active");
+
+
   const city = document.getElementById("city").value;
   try {
     const { lat, lon } = await getCoordinates(city);
@@ -78,6 +98,12 @@ async function getForecast(){
  
     // Display forecast data
     displayForecast(forecastData.daily);
+
+    //Hide current section
+    document.getElementById("current-weather").style.display = "none";
+
+    //Show forecast section
+    document.getElementById("forecast-section").style.display = "block";
  
   }
   catch(err){
@@ -88,7 +114,7 @@ async function getForecast(){
 function displayForecast(data) {
  
   const weekdayFmt = new Intl.DateTimeFormat('en-US', { weekday: 'short' });
-  const dayItems = document.querySelectorAll("#forecast .day-item");
+  const dayItems = document.querySelectorAll("#forecast-section .day-item");
  
   data.time.forEach((dateStr, i) => {
     if (dayItems[i]) {
@@ -98,8 +124,5 @@ function displayForecast(data) {
         `${data.temperature_2m_min[i]}°C / ${data.temperature_2m_max[i]}°C`;
     }
   });
- 
-  // Show the forecast section
-  document.getElementById("forecast").style.display = "block";
 }
  

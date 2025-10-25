@@ -1,60 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Weather Dashboard</title>
   <link rel="stylesheet" href="index.css" />
-  <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
+
 <body>
   <div class="container">
     <div class="weather-card">
       <h1>Weather Dashboard</h1>
 
       <div class="search">
-        <input
-          type="text"
-          id="city"
-          placeholder="Enter city name"
-        />
+        <input type="text" id="city" placeholder="Enter city name" />
         <button id="search-button" onclick="getWeather()">
           <i class="fa fa-search"></i>
         </button>
       </div>
 
-      <!-- Forecast button (initially hidden) -->
-      <div>
-        <button id="show-forecast" onclick="getForecast()" class="search" style="display:none;">
-          Get 7 day forecast
-        </button>
+      <!--Button Tabs Section-->
+      <div id="tab-button-section" style="display: none;">
+        <!--Weather Tab Button-->
+        <div>
+          <button id="weather-btn" onclick="getWeather()" class="tab-btns">
+            Current Weather
+          </button>
+        </div>
+
+        <!--7 Day forecast Tab button-->
+        <div>
+          <button id="forecast-btn" onclick="getForecast()" class="tab-btns">
+            7 day Forecast
+          </button>
+        </div>
       </div>
 
-      <!-- Current Weather -->
-       <div id="currentWeatherDiv" style="display:none;">
-        <h2>Current Weather</h2>
-       </div>
+      <!-- Current Weather Section-->
       <div id="current-weather" class="weather-section card">
         <img id="weather-icon" class="icons" src="images/sun.png" alt="weather icon" />
         <h1 class="temp" id="temperature">--°C</h1>
         <h2 class="city" id="city-name">City</h2>
         <div class="details">
           <div class="col">
-            <img src="images/humidity.png" class="icons" alt="humidity-icon"/>
+            <img src="images/humidity.png" class="icons" alt="humidity-icon" />
             <p class="humidity" id="humidity">Humidity: --%</p>
           </div>
           <div class="col">
-            <img src="images/wind.png" class="icons" alt="wind-icon"/>
+            <img src="images/wind.png" class="icons" alt="wind-icon" />
             <p class="wind" id="wind">Wind: -- km/h</p>
           </div>
         </div>
       </div>
 
-      <!-- Forecast -->
-      <div id="forecast" class="forecast-section card" style="display: none;">
+
+      <!-- Forecast Weather Section-->
+      <div id="forecast-section" class="forecast-section card" style="display: none;">
         <h2>7-Day Forecast</h2>
         <div class="forecast-days">
           <div class="day-item"><span class="day-label">Mon</span><span class="day-temps">--°C / --°C</span></div>
@@ -71,4 +74,5 @@
 
   <script src="index.js"></script>
 </body>
+
 </html>
